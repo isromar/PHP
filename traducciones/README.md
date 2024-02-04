@@ -18,4 +18,4 @@ CREATE TABLE english_spanish (
 )
 
 ## Image preview
-![Preview de la Web App](https://raw.githubusercontent.com/isromar/PHP/main/traducciones/preview.JPG)
+![Preview](https://raw.githubusercontent.com/isromar/PHP/main/traducciones/preview.JPG)
