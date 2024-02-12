@@ -49,7 +49,7 @@ CREATE TABLE english_spanish (
         padding: 3px 5px 3px 5px;
     }
 
-    input[name="submit"] {
+    input[name="submit"], #refresh {
         background-color: #04AA6D;
         color: white;
         /* Aumenta el padding para hacer el botón más grande */
@@ -77,12 +77,20 @@ CREATE TABLE english_spanish (
     }
 </style>
 
+<script>
+    // JavaScript para recargar la página al hacer clic en el botón
+    let refresh = document.getElementById('refresh');
+    refresh.addEventListener('click', () => {
+        location.reload();
+    });
+</script>
+
 
 <body>
 
     <h2>Traductor</h2>
 
-    <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>" onsubmit="setTimeout(function(){location.reload();},10);">
+    <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
         <label for="english">Inglés:</label>
         <input type="text" id="english" name="english">
 
@@ -90,6 +98,7 @@ CREATE TABLE english_spanish (
         <input type="text" id="spanish" name="spanish">
 
         <input type="submit" name="submit" value="Guardar">
+        <button id="refresh">Recargar</button>
     </form>
 
     <?php
@@ -144,7 +153,7 @@ CREATE TABLE english_spanish (
         $conexion->close();
 
         // Recargar la página
-        echo "<meta http-equiv='refresh' content='0'>";
+        //echo "<meta http-equiv='refresh' content='0'>";
     }
     ?>
 
@@ -161,9 +170,10 @@ CREATE TABLE english_spanish (
                 die("Error en la conexión: " . $conexion->connect_error);
             }
 
-            // Obtener los valores del formulario
-            $spanish = $conexion->real_escape_string($_POST['spanish']);
-            $english = $conexion->real_escape_string($_POST['english']);
+            // Obtener los valores del formulario y eliminar espacios al inicio y final
+            $spanish = $conexion->real_escape_string(trim($_POST['spanish']));
+            $english = $conexion->real_escape_string(trim($_POST['english']));
+
 
             // Insertar los valores en la base de datos
             $sql = "INSERT INTO english_spanish (english_text, spanish_text) VALUES ('$english', '$spanish')";
@@ -178,6 +188,7 @@ CREATE TABLE english_spanish (
         } else {
             echo "Ambos campos deben tener texto";
         }
+
     }
     ?>
 
