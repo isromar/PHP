@@ -1,0 +1,23 @@
+# Archivos de configuración de Eclipse
+.classpath
+.project
+.settings
+.metadata
+
+# Archivos y directorios generados durante la compilación
+*.log
+*.zip
+*.class
+*.swp
+target
+classes
+build
+bin
+
+# Otros archivos generados
+*~
+
+# Directorios
+web/
+API/
+php/
