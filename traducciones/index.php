@@ -107,10 +107,12 @@ CREATE TABLE english_spanish (
     // Mostrar las traducciones en el formulario
     if ($resultado->num_rows > 0) {
         echo "<table>";
-        echo "<tr><th>Inglés</th><th>Español</th><th>Acción</th></tr>";
+        echo "<tr><th>Nº</th><th>Inglés</th><th>Español</th><th>Acción</th></tr>";
+        $contador = 1;  // Contador para numerar las filas de la tabla
         while ($row = $resultado->fetch_assoc()) {
-            echo "<tr><td>" . $row["english_text"] . "</td><td>" . $row["spanish_text"] . "</td>";
-            echo "<td><form method='post' action='" . $_SERVER['PHP_SELF'] . "'><input type='hidden' name='id' value='" . $row["id"] . "'><input type='submit' name='delete' value='Borrar'></form></td></tr>";
+            echo "<tr><td>$contador</td><td>" . $row["english_text"] . "</td><td>" . $row["spanish_text"] . "</td>";
+            echo "<td><form method='post' action='" . $_SERVER['PHP_SELF'] . "'><input type='hidden' name='id' value='" . $row["id"] . "'><input type='submit' name='delete' value='Borrar'></form></tr>";
+            $contador++;
         }
         echo "</table>";
     } else {
