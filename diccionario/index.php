@@ -67,7 +67,7 @@ CREATE TABLE english_spanish (
     table {
         margin-top: 2%;
         border-collapse: collapse;
-        width: 50%;
+        width: 70%;
     }
 
     th,
@@ -75,6 +75,15 @@ CREATE TABLE english_spanish (
         border: 1px solid #dddddd;
         text-align: left;
         padding: 8px;
+        width: 2%;
+    }
+
+    td:nth-child(2), td:nth-child(3) {
+    width: 20%;
+    }
+
+    td:nth-child(4) {
+    width: 5%;
     }
 
     th {
