@@ -16,7 +16,7 @@ CREATE TABLE english_spanish (
 )
 
 ## Image preview
-![Preview](https://raw.githubusercontent.com/isromar/PHP/main/diccionario/preview.JPG)
+![Preview](https://raw.githubusercontent.com/isromar/php/main/diccionario/preview.JPG)
 
 # Idea
 Este archivo surge porque al leer textos en inglés y aparecer algunas palabras que desconozco, pienso que estaría bien poder disponer de un diccionario propio donde poder almacenarlas y de ese modo facilitar la memorización.  
