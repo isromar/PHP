@@ -1,5 +1,6 @@
 # Diccionario
 Almacena la información en una base de datos y muestra dinámicamente los registros ordenados alfabéticamente, además permite borrar los ya existentes.  
+Tiene un botón que al pulsarlo pronuncia el texto en inglés.  
 Funciona con un formulario que permite ingresar pares de frases en inglés y español, además de la pronunciación.  
 
 ## Autor
