@@ -18,7 +18,7 @@ CREATE TABLE english_spanish (
 <html>
 
 <head>
-    <title>Traductor</title>
+    <title>Diccionario personal</title>
 </head>
 
 <style>
@@ -89,6 +89,21 @@ CREATE TABLE english_spanish (
     th {
         background-color: #f2f2f2;
     }
+
+    #scrollToTop {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 99;
+    border: none;
+    outline: none;
+    background-color: red;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 10px;
+    }
+
 </style>
 
 <script>
@@ -97,6 +112,22 @@ CREATE TABLE english_spanish (
     refresh.addEventListener('click', () => {
         location.reload();
     });
+
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("scrollToTop").style.display = "block";
+        } else {
+            document.getElementById("scrollToTop").style.display = "none";
+        }
+    }
+
+    function topFunction() {
+        document.body.scrollTop = 0; // Para Safari
+        document.documentElement.scrollTop = 0; // Para Chrome, Firefox, IE y Opera
+    }
+
 </script>
 
 
@@ -178,8 +209,8 @@ CREATE TABLE english_spanish (
     <?php
     // Procesar el formulario cuando se envíe
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Verificar que todos los campos tengan texto
-        if (!empty($_POST['spanish']) && !empty($_POST['english']) && !empty($_POST['pronunciation'])) {
+        // Verificar que los campos tengan texto
+        if (!empty($_POST['spanish']) && !empty($_POST['english'])) {
             // Conectar a la base de datos
             $conexion = new mysqli("localhost", "root", "", "traducciones");
 
@@ -193,21 +224,34 @@ CREATE TABLE english_spanish (
             $english = $conexion->real_escape_string(trim($_POST['english']));
             $pronunciation = $conexion->real_escape_string(trim($_POST['pronunciation']));
 
-            // Insertar los valores en la base de datos
-            $sql = "INSERT INTO english_spanish (english_text, spanish_text, pronunciation) VALUES ('$english', '$spanish', '$pronunciation')";
-            if ($conexion->query($sql) === TRUE) {
-                echo "Traducción guardada correctamente";
+            // Consulta para verificar si el término en inglés ya existe
+            $consulta = "SELECT id FROM english_spanish WHERE english_text = '$english'";
+            $resultado = $conexion->query($consulta);
+
+            // Verificar si se encontraron resultados
+            if ($resultado->num_rows > 0) {
+                echo "<script>alert('El término en inglés ya existe en la base de datos');</script>";
             } else {
-                echo "Error al guardar la traducción: " . $conexion->error;
+                // Insertar los valores en la base de datos
+                $sql = "INSERT INTO english_spanish (english_text, spanish_text, pronunciation) VALUES ('$english', '$spanish', '$pronunciation')";
+                if ($conexion->query($sql) === TRUE) {
+                    echo "Traducción guardada correctamente";
+                } else {
+                    echo "Error al guardar la traducción: " . $conexion->error;
+                }
+
+                // Cerrar la conexión a la base de datos
+                $conexion->close();
             }
 
-            // Cerrar la conexión a la base de datos
-            $conexion->close();
         } else {
-            echo "Todos los campos deben tener texto";
+
         }
+        
 }
     ?>
+
+    <button onclick="topFunction()" id="scrollToTop" title="Go to top">▲</button>
 
 </body>
 

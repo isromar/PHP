@@ -1,5 +1,5 @@
 # Diccionario
-Almacena la información en una base de datos y muestra dinámicamente los registros ordenados alfabéticamente, además permite borrar los ya existentes.
+Almacena la información en una base de datos y muestra dinámicamente los registros ordenados alfabéticamente, además permite borrar los ya existentes.  
 Funciona con un formulario que permite ingresar pares de frases en inglés y español, además de la pronunciación.  
 
 ## Autor
@@ -12,7 +12,8 @@ CREATE DATABASE IF NOT EXISTS traducciones;
 CREATE TABLE english_spanish (  
     id INT AUTO_INCREMENT PRIMARY KEY,  
     english_text VARCHAR(255) NOT NULL,  
-    spanish_text VARCHAR(255) NOT NULL  
+    spanish_text VARCHAR(255) NOT NULL,
+    pronuntiation VARCHAR(150)
 )
 
 ## Image preview
