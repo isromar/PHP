@@ -145,7 +145,7 @@ CREATE TABLE english_spanish (
 
 
 <body>
-    <h2>Traductor</h2>
+    <h2>Diccionario personal</h2>
     <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
         <label for="english">Inglés:</label>
         <input type="text" id="english" name="english">
