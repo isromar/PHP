@@ -44,7 +44,7 @@ CREATE TABLE english_spanish (
         width: 10%;
     }
 
-    input[type="submit"] {
+    input[type="submit"], #play {
         background-color: darkred;
         color: white;
         /* Aumenta el padding para hacer el botón más grande */
@@ -104,6 +104,12 @@ CREATE TABLE english_spanish (
     border-radius: 10px;
     }
 
+    #play {
+        padding-left: 15px;
+        padding-right: 15px;
+        background-color: #04AA6D;
+    }
+
 </style>
 
 <script>
@@ -126,6 +132,13 @@ CREATE TABLE english_spanish (
     function topFunction() {
         document.body.scrollTop = 0; // Para Safari
         document.documentElement.scrollTop = 0; // Para Chrome, Firefox, IE y Opera
+    }
+
+    function playAudio(texto) {
+        var synth = window.speechSynthesis;
+        var utterance = new SpeechSynthesisUtterance(texto);
+        utterance.lang = 'en-GB'; // Para inglés británico
+        synth.speak(utterance);
     }
 
 </script>
@@ -162,10 +175,10 @@ CREATE TABLE english_spanish (
     // Mostrar las traducciones en el formulario
     if ($resultado->num_rows > 0) {
         echo "<table>";
-        echo "<tr><th>Nº</th><th>Inglés</th><th>Español</th><th>Pronunciación</th><th>Acción</th></tr>";
+        echo "<tr><th>Nº</th><th>Inglés</th><th>Español</th><th>Pronunciación</th><th>Reproducir</th><th>Acción</th></tr>";
         $contador = 1;  // Contador para numerar las filas de la tabla
         while ($row = $resultado->fetch_assoc()) {
-            echo "<tr><td>$contador</td><td>" . $row["english_text"] . "</td><td>" . $row["spanish_text"] . "</td><td>" . $row["pronunciation"] . "</td>";
+            echo "<tr><td>$contador</td><td>" . $row["english_text"] . "</td><td>" . $row["spanish_text"] . "</td><td>" . $row["pronunciation"] . "</td><td><button id='play' onclick=\"playAudio('" . $row["english_text"] . "')\">Play</button></td>";
             echo "<td><form method='post' action='" . $_SERVER['PHP_SELF'] . "'><input type='hidden' name='id' value='" . $row["id"] . "'><input type='submit' name='delete' value='Borrar'></form></tr>";
             $contador++;
         }
