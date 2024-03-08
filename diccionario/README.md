@@ -1,14 +1,9 @@
 # Diccionario
-Funciona con un formulario que permite ingresar pares de frases en inglés y español, además de la pronunciación.  
-Almacena la información en una base de datos y muestra los registros ordenados alfabéticamente, además permite borrar los ya existentes.  
-Tiene un botón 'Play' que al pulsarlo pronuncia el texto en inglés.  
+Funciona con un formulario que permite ingresar pares de frases en inglés y español, además de la pronunciación. Almacena la información en una base de datos y muestra los registros ordenados alfabéticamente, además permite borrar los ya existentes. Tiene un botón 'Play' que al pulsarlo pronuncia el texto en inglés.  
 
 *Works with a form that allows entering pairs of phrases in English and Spanish, along the pronunciation.
 Stores the information in a database and displays the records alphabetically, also allowing the deletion of existing ones.
 It has a 'Play' button that, when clicked, pronounces the English text.*
-
-## Autor
-Isabel Rodenas Marin
 
 ## Database
 Para que funcione correctamente hay que crear la base de datos
@@ -32,4 +27,7 @@ CREATE TABLE english_spanish (
 ## Idea
 Este archivo surge porque al leer textos en inglés y aparecer algunas palabras que desconozco, pienso que estaría bien poder disponer de un diccionario propio donde poder almacenarlas y de ese modo facilitar la memorización.  
 
-*This file arises from reading texts in English and encountering some unknown words. I think it would be beneficial to have our own dictionary where we can store them, thus facilitating memorization.*
+*This file arises from reading texts in English and finding some unknown words. I think it would be beneficial to have our own dictionary where we can store them, thus facilitating memorization.*
+
+## Autor
+Isabel Rodenas Marin
