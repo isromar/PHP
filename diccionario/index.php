@@ -138,7 +138,14 @@ CREATE TABLE english_spanish (
         var synth = window.speechSynthesis;
         var utterance = new SpeechSynthesisUtterance(texto);
         utterance.lang = 'en-GB'; // Para inglés británico
-        synth.speak(utterance);
+        
+        // Intenta reproducir el audio
+        try {
+            synth.speak(utterance);
+        } catch (error) {
+            // Si hay un error al reproducir, mostrar el texto en una ventana emergente
+            alert(texto);
+        }
     }
 
 </script>
