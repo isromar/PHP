@@ -1,7 +1,7 @@
 # Diccionario
 Funciona con un formulario que permite ingresar pares de frases en inglés y español, además de la pronunciación. Almacena la información en una base de datos y muestra los registros ordenados alfabéticamente, además permite borrar los ya existentes. Tiene un botón 'Play' que al pulsarlo pronuncia el texto en inglés.  
 
-*Works with a form that allows entering pairs of phrases in English and Spanish, along the pronunciation.
+*It works with a form that allows entering pairs of phrases in English and Spanish, along the pronunciation.
 Stores the information in a database and displays the records alphabetically, also allowing the deletion of existing ones.
 It has a 'Play' button that, when clicked, pronounces the English text.*
 
