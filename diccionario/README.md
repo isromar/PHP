@@ -33,4 +33,4 @@ Este archivo surge porque al leer textos en inglés y aparecer algunas palabras 
 Isabel Rodenas Marin
 
 ## Try it
-[Try it](https://isabelrodenas.es/diccionario/)
+You can try how it works [Try it](https://isabelrodenas.es/diccionario/)
