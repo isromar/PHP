@@ -21,6 +21,49 @@ CREATE TABLE english_spanish (
     <title>Diccionario personal</title>
 </head>
 
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // JavaScript para recargar la página al hacer clic en el botón
+        let refresh = document.getElementById('refresh');
+        if (refresh) {
+            refresh.addEventListener('click', () => {
+                location.reload();
+            });
+        }
+
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById("scrollToTop").style.display = "block";
+            } else {
+                document.getElementById("scrollToTop").style.display = "none";
+            }
+        }
+
+        function topFunction() {
+            document.body.scrollTop = 0; // Para Safari
+            document.documentElement.scrollTop = 0; // Para Chrome, Firefox, IE y Opera
+        }
+
+        function playAudio(texto) {
+            var synth = window.speechSynthesis;
+            var utterance = new SpeechSynthesisUtterance(texto);
+            utterance.lang = 'en-GB'; // Para inglés británico
+            
+            // Intenta reproducir el audio
+            try {
+                synth.speak(utterance);
+            } catch (error) {
+                // Si hay un error al reproducir, mostrar el texto en una ventana emergente
+                alert(texto);
+            }
+        }
+    });
+
+</script>
+
 <style>
     label {
         font-size: large;
@@ -110,49 +153,21 @@ CREATE TABLE english_spanish (
         background-color: #04AA6D;
     }
 
+    .center{
+        text-align: center;
+    }
+
 </style>
 
-<script>
-    // JavaScript para recargar la página al hacer clic en el botón
-    let refresh = document.getElementById('refresh');
-    refresh.addEventListener('click', () => {
-        location.reload();
-    });
-
-    window.onscroll = function() {scrollFunction()};
-
-    function scrollFunction() {
-        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-            document.getElementById("scrollToTop").style.display = "block";
-        } else {
-            document.getElementById("scrollToTop").style.display = "none";
-        }
-    }
-
-    function topFunction() {
-        document.body.scrollTop = 0; // Para Safari
-        document.documentElement.scrollTop = 0; // Para Chrome, Firefox, IE y Opera
-    }
-
-    function playAudio(texto) {
-        var synth = window.speechSynthesis;
-        var utterance = new SpeechSynthesisUtterance(texto);
-        utterance.lang = 'en-GB'; // Para inglés británico
-        
-        // Intenta reproducir el audio
-        try {
-            synth.speak(utterance);
-        } catch (error) {
-            // Si hay un error al reproducir, mostrar el texto en una ventana emergente
-            alert(texto);
-        }
-    }
-
-</script>
-
-
 <body>
-    <h2>Diccionario personal</h2>
+    <h2 class="center">Diccionario personal</h2>
+<ul>
+    <li>Escribe texto en las casillas de inglés y español, opcionalmente en pronunciación</li>
+    <li>Pincha en guardar</li>
+    <li>Pincha en recargar para cargar el último término introducido</li>
+    <li>Para escuchar el texto en inglés pulsa 'Play' esto está en revisión</li>
+</ul>
+
     <form method="post" action="<?php echo $_SERVER['PHP_SELF']; ?>">
         <label for="english">Inglés:</label>
         <input type="text" id="english" name="english">
@@ -169,7 +184,8 @@ CREATE TABLE english_spanish (
 
     <?php
     // Conectar a la base de datos
-    $conexion = new mysqli("localhost", "root", "", "traducciones");
+    //$conexion = new mysqli("localhost", "traducciones", "", "traducciones");
+    $conexion = new mysqli("localhost:3306", "diccionario", "e_l541bW2", "diccionario");
 
     // Verificar la conexión
     if ($conexion->connect_error) {
@@ -194,13 +210,13 @@ CREATE TABLE english_spanish (
         echo "0 resultados";
 
     // Recargar la página
-    echo "<meta http-equiv='refresh' content='0'>";
+    //echo "<meta http-equiv='refresh' content='0'>";
     }
 
     // Procesar la eliminación cuando se envíe
     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['delete'])) {
         // Conectar a la base de datos
-        $conexion = new mysqli("localhost", "root", "", "traducciones");
+        $conexion = new mysqli("localhost:3306", "diccionario", "e_l541bW2", "diccionario");
 
         // Verificar la conexión
         if ($conexion->connect_error) {
@@ -232,7 +248,7 @@ CREATE TABLE english_spanish (
         // Verificar que los campos tengan texto
         if (!empty($_POST['spanish']) && !empty($_POST['english'])) {
             // Conectar a la base de datos
-            $conexion = new mysqli("localhost", "root", "", "traducciones");
+            $conexion = new mysqli("localhost:3306", "diccionario", "e_l541bW2", "diccionario");
 
             // Verificar la conexión
             if ($conexion->connect_error) {
